@@ -1,21 +1,43 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
+enum class Nivel { BASICO, INTERMEDIARIO, AVANCADO }
 
-enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
-
-class Usuario
-
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
-
-data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
-
-    val inscritos = mutableListOf<Usuario>()
-    
-    fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
-    }
-}
+class Aluno(val nome: String, val idade: Int, val nivel: Nivel)
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    println("Bem-vindo ao sistema de matrícula!")
+
+    print("Digite o nome do aluno: ")
+    val nomeAluno = readLine()
+
+    print("Digite a idade do aluno: ")
+    val idadeAluno = readLine()?.toIntOrNull()
+
+    if (idadeAluno == null || idadeAluno <= 0) {
+        println("Idade inválida. Por favor, insira uma idade válida.")
+        return
+    }
+
+    println("Escolha o nível do curso:")
+    println("1. Básico")
+    println("2. Intermediário")
+    println("3. Avançado")
+
+    print("Digite o número correspondente ao nível do curso: ")
+    val nivelEscolhido = readLine()?.toIntOrNull()
+
+    val nivel: Nivel = when (nivelEscolhido) {
+        1 -> Nivel.BASICO
+        2 -> Nivel.INTERMEDIARIO
+        3 -> Nivel.AVANCADO
+        else -> {
+            println("Nível inválido. Escolha 1 para Básico, 2 para Intermediário ou 3 para Avançado.")
+            return
+        }
+    }
+
+    val aluno = Aluno(nomeAluno ?: "", idadeAluno, nivel)
+
+    println("\nMatrícula realizada com sucesso!")
+    println("Nome do aluno: ${aluno.nome}")
+    println("Idade do aluno: ${aluno.idade}")
+    println("Nível do curso: ${aluno.nivel}")
 }
